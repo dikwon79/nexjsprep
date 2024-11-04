@@ -1,3 +1,7 @@
+import { Suspense } from "react";
+import MovieInfo from "../../../../components/movie-info";
+import MovieVidoes from "../../../../components/movie-videos";
+
 
 export default async function MovieDetail({
     params,
@@ -8,7 +12,20 @@ export default async function MovieDetail({
 }) {
     
     const { id } = await params;
-    return <p>Movie: {id}</p>;
+
+    
+    return (
+        <div>
+            <h3>Movie detail page</h3>
+            <Suspense fallback ={<h1>Loading movie info</h1>}>
+                <MovieInfo id={id}/>
+            </Suspense>
+            <Suspense fallback ={<h1>Loading movie video</h1>}>
+                <MovieVidoes id={id}/>
+            </Suspense>
+        
+        </div>
+    )
 }
 
 
